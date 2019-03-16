@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from '../components/home/home.component';
 import { LoginComponent } from '../components/login/login.component';
+import { DriverComponent } from '../components/driver/driver.component';
+import { PassengerComponent } from '../components/passenger/passenger.component';
 
 const routes: Routes = [
   {
@@ -19,6 +21,16 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
+    pathMatch: 'full',
+  },
+  {
+    path: 'driver',
+    component: DriverComponent,
+    pathMatch: 'full',
+  },
+  {
+    path: 'passenger',
+    component: PassengerComponent,
     pathMatch: 'full',
   },
   // {
