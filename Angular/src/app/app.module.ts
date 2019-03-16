@@ -13,6 +13,8 @@ import { HttpClientModule } from '@angular/common/http'; import { HttpModule } f
 import { DriverComponent } from './components/driver/driver.component';
 import { PassengerComponent } from './components/passenger/passenger.component';
 
+import { GoogleChartsModule } from 'angular-google-charts';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +31,8 @@ import { PassengerComponent } from './components/passenger/passenger.component';
     FormsModule,
     HttpClientModule,
     HttpModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    GoogleChartsModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]
