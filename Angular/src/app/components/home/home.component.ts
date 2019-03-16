@@ -30,4 +30,8 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  scrollToSection(section) {
+    document.getElementById(section).scrollIntoView({ block: 'center', inline: 'center' });
+  }
+
 }
