@@ -32,15 +32,16 @@
   <div class="container text-center">
     <h1>Welcome to StudentCab</h1>
     <p class="lead">Your favourite car sharing app</p>
-    <h1>You are:</h1>
-    <div class="imagini" id="soferPasager">
-      <div class="imagini">
-        <img id="sofer_pasager_" src="assets/images/driver.png">
+    <div>
+      <h1>You are:</h1>
+      <div class="imagini" id="soferPasager">
+        <div class="imagini">
+          <img id="sofer_" (click)="driver($event)" src="assets/images/driver.png">
+        </div>
+        <div class="imagini">
+          <img id="pasager_" (click)="pasager($event)" src="assets/images/passager.png">
+        </div>
       </div>
-      <div class="imagini">
-        <img id="sofer_pasager_" src="assets/images/passager.png">
-      </div>
-
     </div>
 
   </div>

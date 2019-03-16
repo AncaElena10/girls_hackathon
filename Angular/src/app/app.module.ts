@@ -10,13 +10,17 @@ import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { LoginComponent } from './components/login/login.component';
 import { HttpClientModule } from '@angular/common/http'; import { HttpModule } from '@angular/http';
+import { DriverComponent } from './components/driver/driver.component';
+import { PassengerComponent } from './components/passenger/passenger.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     HistoryComponent,
-    LoginComponent
+    LoginComponent,
+    DriverComponent,
+    PassengerComponent
   ],
   imports: [
     BrowserModule,
