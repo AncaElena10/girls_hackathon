@@ -1,0 +1,24 @@
+version: '3'
+services:
+ postgres:
+  image: postgres
+  environment:
+   POSTGRES_USER: "admin"
+   POSTGRES_PASSWORD: "admin"
+  ports:
+   - "5432:5432"
+  volumes: 
+   - ./postgres_init:/var/lib/postgresql/data/
+ ride_sharing:
+  build:
+    context: .
+    dockerfile: Dockerfile
+  command: python3 manage.py runserver 0.0.0.0:8080
+  ports:
+   - "8080:8080"
+  volumes:
+   - .:/ride_sharing
+  depends_on:
+   - postgres
+  working_dir: /ride_sharing/ride_sharing
+ 
