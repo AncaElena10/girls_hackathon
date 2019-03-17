@@ -13,7 +13,7 @@ class AppUser(models.Model):
     phone = models.CharField(max_length=20)
 
     def __str__(self):
-        return self.first_name + " " + self.last_name
+        return "{} {}".format(self.first_name, self.last_name)
 
 class Ride(models.Model):
     CREATED = "Created"
@@ -52,3 +52,7 @@ class Ride(models.Model):
 
     def passengers_set(self, path, value):
         dpath.util.new(self.passengers, path, value)
+
+
+    def __str__(self):
+        return "{} / {}".format(self.pk, self.name)

@@ -107,17 +107,16 @@ class RideViewSet(viewsets.GenericViewSet):
             return response.Response(status=404, data={'error': 'This ride does not exist'})
         
         try:
-            print("ALOOOOO")
             passenger_id = request.data.get('passenger_id')
         except AppUser.DoesNotExist:
             return response.Response(status=404, data={'error': 'This user does not exist'})
         
-        print(ride.free_slots)
         if ride.free_slots > 0:
             ride.free_slots -= 1
             passengers = ride.passengers_get('ids', [])
-            print(passengers)
-            print("ALOOOOOO")
+
+            if passenger_id in passengers:
+                return response.Response(status=405, data={'error': 'You have already chosen this ride'})
             passengers.append(passenger_id)
             ride.passengers_set('ids', passengers)
             ride.save()

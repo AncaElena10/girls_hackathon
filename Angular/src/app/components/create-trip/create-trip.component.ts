@@ -94,7 +94,7 @@ export class CreateTripComponent implements OnInit {
   end_pos_lat1
   end_pos_long1
 
-  markerDragEnd(m: any, event: MouseEvent) {
+  markerDragEnd(m: any, event: any) {
     if (this.tripStart) {
       this.start_pos_lat1 = event.coords.lat
       this.start_pos_long1 = event.coords.lng
