@@ -54,7 +54,7 @@
         <td>{{trip.trip_from }}</td>
         <td>{{trip.trip_to }}</td>
         <td>{{trip.trip_time | date: "shortDate" }}</td>
-        <td>{{trip.cost }}</td>
+        <td>{{trip.cost }} lei</td>
         <td>{{trip.trip_seats }}</td>
       </tr>
     </tbody>
@@ -64,9 +64,9 @@
   <table class="table">
     <thead>
       <tr>
-        <!-- <th scope="col">Name</th>
-          <th scope="col">From</th>
-          <th scope="col">To</th> -->
+        <th scope="col">Driver name</th>
+        <th scope="col">From</th>
+        <th scope="col">To</th>
         <th scope="col">End time</th>
         <th scope="col">Cost</th>
         <th scope="col">Seats</th>
@@ -74,11 +74,11 @@
     </thead>
     <tbody>
       <tr *ngFor="let trip of history_trips">
-        <!-- <td>{{trip.trip_name }}</td> -->
-        <!-- <td>{{trip.trip_from }}</td> -->
-        <!-- <td>{{trip.trip_to }}</td> -->
+        <td>{{trip.driver_name }}</td>
+        <td>{{trip.trip_from }}</td>
+        <td>{{trip.trip_to }}</td>
         <td>{{trip.end_time | date: "shortDate" }}</td>
-        <td>{{trip.cost }}</td>
+        <td>{{trip.cost }} lei</td>
         <td>{{trip.free_slots }}</td>
       </tr>
     </tbody>

@@ -102,7 +102,11 @@ export class PassengerComponent implements OnInit {
 
   onClick(id) {
     // console.log(id)
-    // this.apiService
+    let obj = {
+      "passenger_id": this.currentLoggedInId
+    }
+
+    this.utilityService.add_ride(id, obj)
   }
 
   history_trips = []
@@ -118,16 +122,14 @@ export class PassengerComponent implements OnInit {
   // }
 
   get_history_trips() {
-    this.utilityService.get_trips_history(this.currentLoggedInId).subscribe((res) => {
-      // console.log(res)
+    this.utilityService.get_trips_history_passenger(this.currentLoggedInId).subscribe((res) => {
+      console.log(res)
       this.extractHistoryTrips(res)
     })
   }
 
   extractHistoryTrips(res) {
     this.history_trips = res
-
-    console.log(this.history_trips)
   }
 }
 

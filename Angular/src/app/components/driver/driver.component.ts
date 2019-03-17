@@ -39,8 +39,21 @@ export class DriverComponent implements OnInit {
 
   currentLoggedInId: any = '';
 
+  history_trips = []
+
   ngOnInit() {
     this.currentLoggedInId = localStorage.getItem("id");
+    this.get_history_trips()
+  }
 
+  get_history_trips() {
+    this.utilityService.get_trips_history_driver(this.currentLoggedInId).subscribe((res) => {
+      console.log(res)
+      this.extractHistoryTrips(res)
+    })
+  }
+
+  extractHistoryTrips(res) {
+    this.history_trips = res
   }
 }
