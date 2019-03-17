@@ -36,8 +36,7 @@
 </header>
 
 <div class="tables_">
-  <h3>Your next trips</h3>
-  <button class="btn btn-primary" style="margin-bottom: 10px;">Add new trip</button>
+  <h3>Your available trips</h3>
   <table class="table">
     <thead>
       <tr>
@@ -50,15 +49,37 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let trip of trips_list">
-        <ng-container *ngIf="trip.driver_id == currentLoggedInId">
-          <td>{{trip.trip_name }}</td>
-          <td>{{trip.trip_from }}</td>
-          <td>{{trip.trip_to }}</td>
-          <td>{{trip.trip_time | date: "shortDate" }}</td>
-          <td>{{trip.cost }}</td>
-          <td>{{trip.trip_seats }}</td>
-        </ng-container>
+      <tr *ngFor="let trip of available_trips" (click)="onClick(trip.driver_id)" style="cursor: pointer">
+        <td>{{trip.trip_name }}</td>
+        <td>{{trip.trip_from }}</td>
+        <td>{{trip.trip_to }}</td>
+        <td>{{trip.trip_time | date: "shortDate" }}</td>
+        <td>{{trip.cost }}</td>
+        <td>{{trip.trip_seats }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>History Rides</h3>
+  <table class="table">
+    <thead>
+      <tr>
+        <!-- <th scope="col">Name</th>
+          <th scope="col">From</th>
+          <th scope="col">To</th> -->
+        <th scope="col">End time</th>
+        <th scope="col">Cost</th>
+        <th scope="col">Seats</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let trip of history_trips">
+        <!-- <td>{{trip.trip_name }}</td> -->
+        <!-- <td>{{trip.trip_from }}</td> -->
+        <!-- <td>{{trip.trip_to }}</td> -->
+        <td>{{trip.end_time | date: "shortDate" }}</td>
+        <td>{{trip.cost }}</td>
+        <td>{{trip.free_slots }}</td>
       </tr>
     </tbody>
   </table>

@@ -19,4 +19,14 @@ export class UtilityService {
   // trips(object) {
   //   console.log(object)
   // }
+
+  get_trips_history(id) {
+    // id = 3
+    // console.log(id)
+    return this.http.get("http://40.121.66.13:8080/api/ride/" + id + "/list_rides_history")
+  }
+
+  get_all_trips() {
+    return this.http.get('')
+  }
 }

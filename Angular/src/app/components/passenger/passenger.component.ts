@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UtilityService } from 'src/app/services/utility.service';
 
 @Component({
   selector: 'app-passenger',
@@ -10,11 +11,41 @@ export class PassengerComponent implements OnInit {
   linechart;
   barchart;
 
-  ngOnInit() {
+  available_trips = [{
+    "trip_name": "otopeni-unirii",
+    'trip_from': "otopeni",
+    'trip_to': "unirii",
+    "trip_time": "2019-03-17T03:34:34+00:00",
+    "cost": 15.12,
+    "trip_seats": 2,
+    "driver_id": 1,
+  },
+  {
+    "trip_name": "drstr-berc",
+    'trip_from': "dristor",
+    'trip_to': "berceni",
+    "trip_time": "2019-04-17T03:34:34+00:00",
+    "cost": 12.78,
+    "trip_seats": 3,
+    "driver_id": 1,
+  }, {
+    "trip_name": "TEEEEEEST1",
+    'trip_from': "pantelimon",
+    'trip_to': "militari",
+    "trip_time": "2019-04-17T03:34:34+00:00",
+    "cost": 21.18,
+    "trip_seats": 3,
+    "driver_id": 2,
+  }]
 
+  currentLoggedInId: any = '';
+
+  ngOnInit() {
+    this.currentLoggedInId = localStorage.getItem("id");
+    this.get_history_trips()
   }
 
-  constructor() {
+  constructor(private utilityService: UtilityService) {
 
     this.piechart = {
       title: 'Pie Chart',
@@ -67,6 +98,36 @@ export class PassengerComponent implements OnInit {
       ],
     };
 
+  }
+
+  onClick(id) {
+    // console.log(id)
+    // this.apiService
+  }
+
+  history_trips = []
+
+  // get_all_trips() {
+  //   this.utilityService.get_all_trips().subscribe((res) => {
+  //     this.extract_all_trips(res)
+  //   })
+  // }
+
+  // extract_all_trips(res) {
+  //   this.all_trips = res
+  // }
+
+  get_history_trips() {
+    this.utilityService.get_trips_history(this.currentLoggedInId).subscribe((res) => {
+      // console.log(res)
+      this.extractHistoryTrips(res)
+    })
+  }
+
+  extractHistoryTrips(res) {
+    this.history_trips = res
+
+    console.log(this.history_trips)
   }
 }
 

@@ -1,6 +1,7 @@
 /// <reference types="@types/googlemaps" />
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
+import { UtilityService } from 'src/app/services/utility.service';
 
 const place = null as google.maps.places.PlaceResult;
 
@@ -30,7 +31,9 @@ export class DriverComponent implements OnInit {
     "driver_id": 1,
   }]
 
-  constructor(private apiService: ApiService) {
+  // trips_list = []
+
+  constructor(private apiService: ApiService, private utilityService: UtilityService) {
 
   }
 
@@ -38,7 +41,6 @@ export class DriverComponent implements OnInit {
 
   ngOnInit() {
     this.currentLoggedInId = localStorage.getItem("id");
+
   }
-
-
 }
