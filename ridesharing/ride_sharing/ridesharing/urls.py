@@ -1,7 +1,7 @@
-"""ride_sharing URL Configuration
+"""mini_iot URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/2.1/topics/http/urls/
+    https://docs.djangoproject.com/en/2.0/topics/http/urls/
 Examples:
 Function views
     1. Add an import:  from my_app import views
@@ -13,17 +13,17 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
 from django.urls import path, include
-from django.conf.urls import url
+from . import views
+from .api.viewsets import UserViewSet
 from rest_framework import routers
-from ridesharing.api.urls import router as ridesharing_router
-from .routers import DefaultRouter
 
-router = DefaultRouter()
-router.extend(ridesharing_router)
+# router = routers.DefaultRouter()
+# router.register(r'ridesharing/login/', UserViewSet, base_name='login')
 
-urlpatterns = [
-    url(r'^admin/', admin.site.urls),
-    url(r'^api/', include(router.urls)),
-]
+# Wire up our API using automatic URL routing.
+# Additionally, we include login URLs for the browsable API.
+# urlpatterns = [
+#     path('', include(router.urls)),
+#     path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
+# ]

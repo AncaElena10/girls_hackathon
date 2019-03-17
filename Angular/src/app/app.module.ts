@@ -14,6 +14,7 @@ import { HttpModule } from '@angular/http';
 import { DriverComponent } from './components/driver/driver.component';
 import { PassengerComponent } from './components/passenger/passenger.component';
 
+import { GoogleChartsModule } from 'angular-google-charts';
 import { AgmCoreModule } from '@agm/core';
 import { GooglePlacesDirective } from './directives/google-places.directive';
 import { GooglePlaceModule } from "ngx-google-places-autocomplete";
@@ -36,6 +37,7 @@ import { GooglePlaceModule } from "ngx-google-places-autocomplete";
     HttpClientModule,
     HttpModule,
     ReactiveFormsModule,
+    GoogleChartsModule.forRoot(),
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyB4KfeROyevO6Jczu4d8G1Onc4Rim7HO4c'
     }),
