@@ -42,7 +42,7 @@ class Ride(models.Model):
     status = models.CharField(max_length=50, choices=STATE, null=False, blank=False)
 
     def __str__(self):
-        return self.name
+        return self.id + " " + self.name
 
     def passengers_get(self, path, default=None):
         try:
