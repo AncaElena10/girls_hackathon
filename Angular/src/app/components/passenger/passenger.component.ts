@@ -15,6 +15,7 @@ export class PassengerComponent implements OnInit {
   }
 
   constructor() {
+
     this.piechart = {
       title: 'Pie Chart',
       type: 'PieChart',
@@ -28,7 +29,7 @@ export class PassengerComponent implements OnInit {
       roles: []
     };
     this.linechart = {
-      title: 'Styled Line Chart',
+      title: 'Money spent on taxi every month',
       type: 'LineChart',
       columnNames: ['Element', 'Density'],
       roles: [
@@ -39,23 +40,19 @@ export class PassengerComponent implements OnInit {
         { type: 'boolean', role: 'certainty' }
       ],
       data: [
-        ['April', 1000],
-        ['May', 1170],
+        ['January', 1000],
+        ['February', 1170],
+        ['March', 660],
+        ['April', 1030],
+        ['May', 1000],
         ['June', 660],
-        ['July', 1030]
+        ['July', 1030],
+        ['August', 1000],
+        ['September', 1170],
+        ['October', 660],
+        ['November', 1030],
+        ['December', 1030]
       ]
-    };
-    this.barchart = {
-      title: 'Material Bar Chart',
-      type: 'Bar',
-      columnNames: ['Year', 'Sales', 'Expenses', 'Profit'],
-      roles: [],
-      data: [
-        ['2014', 1000, 400, 200],
-        ['2015', 1170, 460, 250],
-        ['2016', 660, 1120, 300],
-        ['2017', 1030, 540, 350]
-      ],
     };
 
   }

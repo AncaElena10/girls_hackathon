@@ -9,19 +9,29 @@
   <div class="input-group" id="margin_">
     <input type="text" class="form-control" placeholder="To" [(ngModel)]="trip_to">
   </div>
+  <!-- date picker -->
   <div class="input-group" id="margin_">
-    <input type="text" class="form-control" placeholder="Time" [(ngModel)]="trip_time">
+    <input type="date" class="form-control" placeholder="Time" [(ngModel)]="trip_time">
   </div>
   <div class="input-group" id="margin_">
-    <input type="text" class="form-control" placeholder="Cost" [(ngModel)]="trip_cost">
+    <input type="text" class="form-control" placeholder="Cost" [(ngModel)]="cost">
   </div>
   <div class="input-group" id="margin_">
     <input type="text" class="form-control" placeholder="Available seats" [(ngModel)]="trip_seats">
   </div>
 
-  <agm-map [latitude]="lat" [longitude]="lng" [scrollwheel]="true" [zoom]="zoom" [fullscreenControl]="true">
-    <agm-marker [latitude]="lat" [longitude]="lng" [draggable]="true"></agm-marker>
-  </agm-map>
+  <div class="col-md-12 stuff_">
+    <div class="col-md-10">
+      <agm-map [latitude]="lat" [longitude]="lng" [scrollwheel]="true" [zoom]="zoom" [fullscreenControl]="true">
+        <agm-marker [latitude]="lat" [longitude]="lng" [markerDraggable]="true" (dragEnd)="markerDragEnd(m, $event)"></agm-marker>
+      </agm-map>
+    </div>
+
+    <div class="col-md-2">
+      <button *ngIf="tripStart" class="btn btn-success" (click)="setStartPoint()">Set start point</button>
+      <button *ngIf="tripEnd" class="btn btn-info" (click)="setEndPoint()">Set end point</button>
+    </div>
+  </div>
 
   <button style="float: right; margin-top: 20px;" type="button" class="btn btn-primary" (click)="save()">Save changes</button>
 
