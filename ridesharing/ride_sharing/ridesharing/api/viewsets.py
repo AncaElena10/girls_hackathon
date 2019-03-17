@@ -1,7 +1,7 @@
 from rest_framework import viewsets, response
 from .serializers import UserSerializer, RideSerializer
 from ridesharing.models import AppUser, Ride
-from rest_framework.decorators import list_route
+from rest_framework.decorators import list_route, detail_route
 
 class UserViewSet(viewsets.GenericViewSet):
     serializer_class = UserSerializer
@@ -23,22 +23,37 @@ class UserViewSet(viewsets.GenericViewSet):
     @list_route(methods=['post'])
     def register(self, request, **kwargs):
         email = request.data.get('email')
-        password = request.get('password')
-        first_name = request.get('firstName')
-        last_name = request.get('lastName')
-        phone = str(request.get('phone'))
+        password = request.data.get('password')
+        first_name = request.data.get('firstName')
+        last_name = request.data.get('lastName')
+        phone = str(request.data.get('phone'))
         
         try:
             user = AppUser.objects.get(email=email)
-        except AppUser.DoesNotExist:
             return response.Response(status=403, data={'error': 'This email is already in use!'})
-
+        except AppUser.DoesNotExist:
+            pass
         try:
             user = AppUser.objects.create(email=email, password=password, first_name=first_name, last_name=last_name, phone=phone)
             return response.Response(status=200, data={'error': 'Success'})
         except:
             return response.Response(status=500, data={'error': 'Coult not create the user'})
-            
+
+    @detail_route(methods=['post'])
+    def vote(self, request, pk, **kwargs):
+        vote = request.data.get('vote')
+
+        try:
+            user = AppUser.objects.get(pk=pk)
+        except AppUser.DoesNotExist:
+            return response.Response(status=404, data={'error': 'This user does not exist!'})
+        
+        user.rating += vote
+        user.no_votes += 1
+
+        user.save()
+        return response.Response(status=200, data={"message": "OK"})
+
 class RideViewSet(viewsets.GenericViewSet):
     serializer_class = RideSerializer
     queryset = AppUser.objects.all()
