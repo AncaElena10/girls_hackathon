@@ -31,4 +31,3 @@ services:
     working_dir: /Angular
     ports:
      - "4200:4200"
- 

@@ -6,8 +6,9 @@ class AppUser(models.Model):
     password = models.CharField('Password', max_length=255, null=False, blank=False)
     first_name = models.CharField('First Name', max_length=255, null=False, blank=False)
     last_name = models.CharField('Last Name', max_length=255, null=False, blank=False)
-    rating = models.IntegerField()
-    no_votes = models.IntegerField()
+    rating = models.IntegerField(default=0)
+    no_votes = models.IntegerField(default=0)
+    phone = models.CharField(max_length=20)
 
 class Ride(models.Model):
     PLANNED = "Planned"

@@ -13,7 +13,7 @@ export class ApiService {
   constructor(private http: HttpClient) { }
 
   login(object) {
-    return this.http.post(this.rootUrl + '/login', object)
+    return this.http.post("http://40.121.66.13:8080/api/ridesharing/login/", object)
   }
 
   register(object) {
