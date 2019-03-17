@@ -26,9 +26,6 @@ class Ride(models.Model):
         (CANCELED, "Canceled"),
     )
 
-    def __str__(self):
-        return self.name
-
     start_pos_lat = models.FloatField()
     start_pos_long = models.FloatField()
     end_pos_lat = models.FloatField()
@@ -42,6 +39,9 @@ class Ride(models.Model):
     total_slots = models.IntegerField()
     passengers = models.CharField(max_length=200)
     status = models.CharField(max_length=50, choices=STATE, null=False, blank=False)
+
+    def __str__(self):
+        return self.name
 
     def set_passengers(self, x):
         self.passengers = json.dumps(x)
