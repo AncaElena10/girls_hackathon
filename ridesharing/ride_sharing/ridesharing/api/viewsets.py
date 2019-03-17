@@ -54,7 +54,6 @@ class UserViewSet(viewsets.GenericViewSet):
         user.save()
         return response.Response(status=200, data={"message": "OK"})
 
-
 class RideViewSet(viewsets.GenericViewSet):
     serializer_class = RideSerializer
     queryset = Ride.objects.all()
