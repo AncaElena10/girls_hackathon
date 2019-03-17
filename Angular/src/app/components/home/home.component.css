@@ -73,3 +73,8 @@ section[_ngcontent-c1] {
 agm-map {
   height: 300px;
 }
+
+#chart {
+  margin-left: 35%;
+  margin-top: 2%;
+}
