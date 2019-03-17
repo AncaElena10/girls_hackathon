@@ -10,15 +10,19 @@
         <li class="nav-item">
           <a class="nav-link js-scroll-trigger" routerLink="/about">About</a>
         </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <a class="nav-link js-scroll-trigger" routerLink="/about">History</a>
-        </li>
+        </li> -->
         <li class="nav-item">
           <a class="nav-link js-scroll-trigger" routerLink="/contact">Contact</a>
         </li>
-        <li class="nav-item">
+        <li *ngIf="currentLoggedInId == null" class="nav-item">
           <a class="nav-link js-scroll-trigger" routerLink="/login" data-toggle="modal" data-target="#modalLRForm">Sign
             in</a>
+        </li>
+        <li *ngIf="currentLoggedInId != null" class="nav-item">
+          <a class="nav-link js-scroll-trigger" routerLink="/logout" data-toggle="modal" data-target="#logout_modal">Log
+            out</a>
         </li>
       </ul>
     </div>
@@ -87,9 +91,8 @@
 
 <!-- <google-chart [title]="chart.title" [type]="chart.type" [data]="chart.data" [columnNames]="chart.columnNames" [options]="chart.options"> -->
 
-<google-chart [title]="piechart.title" [type]="piechart.type" [data]="piechart.data" [columnNames]="piechart.columnNames"
-  [options]="piechart.options">
-</google-chart>
-<google-chart [title]="linechart.title" [type]="linechart.type" [data]="linechart.data" [columnNames]="linechart.columnNames"
-  [options]="linechart.options">
-</google-chart>
+<div id="chart">
+  <google-chart [title]="piechart.title" [type]="piechart.type" [data]="piechart.data" [columnNames]="piechart.columnNames"
+    [options]="piechart.options">
+  </google-chart>
+</div>

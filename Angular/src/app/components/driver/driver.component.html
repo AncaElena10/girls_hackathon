@@ -10,9 +10,9 @@
         <li class="nav-item">
           <a class="nav-link js-scroll-trigger" routerLink="/about">About</a>
         </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <a class="nav-link js-scroll-trigger" routerLink="/about">History</a>
-        </li>
+        </li> -->
         <li class="nav-item">
           <a class="nav-link js-scroll-trigger" routerLink="/contact">Contact</a>
         </li>
@@ -40,33 +40,6 @@
 </header>
 
 <div class="tables_">
-  <h3>Your next trips</h3>
-  <button class="btn btn-primary" routerLink="/new_trip" style="margin-bottom: 10px;">Add new trip</button>
-  <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">Name</th>
-        <th scope="col">From</th>
-        <th scope="col">To</th>
-        <th scope="col">Time</th>
-        <th scope="col">Cost</th>
-        <th scope="col">Seats</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let trip of trips_list">
-        <ng-container *ngIf="trip.driver_id == currentLoggedInId">
-          <td>{{trip.trip_name }}</td>
-          <td>{{trip.trip_from }}</td>
-          <td>{{trip.trip_to }}</td>
-          <td>{{trip.trip_time | date: "shortDate" }}</td>
-          <td>{{trip.cost }} lei</td>
-          <td>{{trip.trip_seats }}</td>
-        </ng-container>
-      </tr>
-    </tbody>
-  </table>
-
   <h3>Requests</h3>
   <table class="table">
     <thead>
@@ -86,7 +59,34 @@
     </tbody>
   </table>
 
-  <h3>History Rides</h3>
+  <h3>Your next rides</h3>
+  <button class="btn btn-primary" routerLink="/new_trip" style="margin-bottom: 10px;">Add new trip</button>
+  <table class="table">
+    <thead>
+      <tr>
+        <!-- <th scope="col">Trip name</th> -->
+        <th scope="col">Driver name</th>
+        <th scope="col">From</th>
+        <th scope="col">To</th>
+        <th scope="col">End time</th>
+        <th scope="col">Cost</th>
+        <th scope="col">Seats</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let trip of next_trips">
+        <!-- <td>{{ trip.trip_name }}</td> -->
+        <td>{{trip.driver_name }}</td>
+        <td>{{trip.trip_from }}</td>
+        <td>{{trip.trip_to }}</td>
+        <td>{{trip.end_time | date: "shortDate" }}</td>
+        <td>{{trip.cost }} lei</td>
+        <td>{{trip.free_slots }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>History</h3>
   <table class="table">
     <thead>
       <tr>
@@ -99,7 +99,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let trip of history_trips">
+      <tr *ngFor="let trip of past_trips">
         <td>{{trip.driver_name }}</td>
         <td>{{trip.trip_from }}</td>
         <td>{{trip.trip_to }}</td>

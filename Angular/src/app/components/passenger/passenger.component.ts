@@ -11,32 +11,32 @@ export class PassengerComponent implements OnInit {
   linechart;
   barchart;
 
-  available_trips = [{
-    "trip_name": "otopeni-unirii",
-    'trip_from': "otopeni",
-    'trip_to': "unirii",
-    "trip_time": "2019-03-17T03:34:34+00:00",
-    "cost": 15.12,
-    "trip_seats": 2,
-    "driver_id": 1,
-  },
-  {
-    "trip_name": "drstr-berc",
-    'trip_from': "dristor",
-    'trip_to': "berceni",
-    "trip_time": "2019-04-17T03:34:34+00:00",
-    "cost": 12.78,
-    "trip_seats": 3,
-    "driver_id": 1,
-  }, {
-    "trip_name": "TEEEEEEST1",
-    'trip_from': "pantelimon",
-    'trip_to': "militari",
-    "trip_time": "2019-04-17T03:34:34+00:00",
-    "cost": 21.18,
-    "trip_seats": 3,
-    "driver_id": 2,
-  }]
+  // available_trips = [{
+  //   "trip_name": "otopeni-unirii",
+  //   'trip_from': "otopeni",
+  //   'trip_to': "unirii",
+  //   "trip_time": "2019-03-17T03:34:34+00:00",
+  //   "cost": 15.12,
+  //   "trip_seats": 2,
+  //   "driver_id": 1,
+  // },
+  // {
+  //   "trip_name": "drstr-berc",
+  //   'trip_from': "dristor",
+  //   'trip_to': "berceni",
+  //   "trip_time": "2019-04-17T03:34:34+00:00",
+  //   "cost": 12.78,
+  //   "trip_seats": 3,
+  //   "driver_id": 1,
+  // }, {
+  //   "trip_name": "TEEEEEEST1",
+  //   'trip_from': "pantelimon",
+  //   'trip_to': "militari",
+  //   "trip_time": "2019-04-17T03:34:34+00:00",
+  //   "cost": 21.18,
+  //   "trip_seats": 3,
+  //   "driver_id": 2,
+  // }]
 
   currentLoggedInId: any = '';
 
@@ -48,43 +48,18 @@ export class PassengerComponent implements OnInit {
   constructor(private utilityService: UtilityService) {
 
     this.piechart = {
-      title: 'Pie Chart',
+      title: 'Money spent last 4 months',
       type: 'PieChart',
       columnNames: ['Task', 'Hours per Day'],
       data: [
-        ['Work', 11],
-        ['Eat', 2],
-        ['Commute', 2],
-        ['Sleep', 7]
+        ['March', 11],
+        ['February', 2],
+        ['January', 2],
+        ['December', 7]
       ],
       roles: []
     };
-    this.linechart = {
-      title: 'Money spent on taxi every month',
-      type: 'LineChart',
-      columnNames: ['Element', 'Density'],
-      roles: [
-        { type: 'number', role: 'interval' },
-        { type: 'number', role: 'interval' },
-        { type: 'string', role: 'annotation' },
-        { type: 'string', role: 'annotationText' },
-        { type: 'boolean', role: 'certainty' }
-      ],
-      data: [
-        ['January', 1000],
-        ['February', 1170],
-        ['March', 660],
-        ['April', 1030],
-        ['May', 1000],
-        ['June', 660],
-        ['July', 1030],
-        ['August', 1000],
-        ['September', 1170],
-        ['October', 660],
-        ['November', 1030],
-        ['December', 1030]
-      ]
-    };
+
     this.barchart = {
       title: 'Material Bar Chart',
       type: 'Bar',
@@ -128,8 +103,21 @@ export class PassengerComponent implements OnInit {
     })
   }
 
+  available_trips = []
+  next_trips = []
+
   extractHistoryTrips(res) {
     this.history_trips = res
+
+    var crtDate = new Date()
+
+    for (let i = 0; i < this.history_trips.length; i++) {
+      if (new Date(this.history_trips[i].start_time) > crtDate && this.history_trips[i].trip_seats > 0) {
+        this.available_trips.push(this.history_trips[i])
+      }
+
+
+    }
   }
 }
 

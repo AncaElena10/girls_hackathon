@@ -83,10 +83,10 @@ export class CreateTripComponent implements OnInit {
 
     // this.router.navigate(['/driver'])
 
-    // this.utilityService.create_ride(this.object).subscribe((res) => {
-    //   // console.log(res)
-    //   this.router.navigate(['/driver'])
-    // })
+    this.utilityService.create_ride(this.object).subscribe((res) => {
+      // console.log(res)
+      this.router.navigate(['/driver'])
+    })
   }
 
   start_pos_lat1

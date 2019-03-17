@@ -41,7 +41,7 @@ import { CreateTripComponent } from './components/create-trip/create-trip.compon
     ReactiveFormsModule,
     GoogleChartsModule.forRoot(),
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyB4KfeROyevO6Jczu4d8G1Onc4Rim7HO4c',
+      apiKey: 'AIzaSyCkx8Bp3Rce6wTLN51OLHqbAp6qTFtzAIM',
       libraries: ['geometry']
     }),
   ],
