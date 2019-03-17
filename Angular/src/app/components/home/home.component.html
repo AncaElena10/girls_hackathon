@@ -59,6 +59,12 @@
     <div class="row">
       <div class="col-lg-8 mx-auto">
         <h2>About the app</h2>
+        <div id="chart">
+          <p class="lead" style="margin-left: 13%">Our prices</p>
+          <google-chart [title]="barchart.title" [type]="barchart.type" [data]="barchart.data" [columnNames]="barchart.columnNames"
+            [options]="barchart.options">
+          </google-chart>
+        </div>
         <p class="lead">We are happy that you are riding with us. You can find your next city journey and make new
           friends on your way. Our application is made so students like you can find cheaper ways to travel, in the
           city or in the whole country. We make sure that you are safe with us :</p>
@@ -72,12 +78,7 @@
 
     </div>
     <img id="taxi2" src="assets/images/taxi2.png">
-    <div id="chart">
-      <h2>Our prices</h2>
-      <google-chart [title]="barchart.title" [type]="barchart.type" [data]="barchart.data" [columnNames]="barchart.columnNames"
-        [options]="barchart.options">
-      </google-chart>
-    </div>
+
   </div>
 </section>
 
