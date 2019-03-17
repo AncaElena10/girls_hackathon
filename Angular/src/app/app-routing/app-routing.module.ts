@@ -5,6 +5,7 @@ import { HomeComponent } from '../components/home/home.component';
 import { LoginComponent } from '../components/login/login.component';
 import { DriverComponent } from '../components/driver/driver.component';
 import { PassengerComponent } from '../components/passenger/passenger.component';
+import { CreateTripComponent } from '../components/create-trip/create-trip.component';
 
 const routes: Routes = [
   {
@@ -31,6 +32,11 @@ const routes: Routes = [
   {
     path: 'passenger',
     component: PassengerComponent,
+    pathMatch: 'full',
+  },
+  {
+    path: 'new_trip',
+    component: CreateTripComponent,
     pathMatch: 'full',
   },
   // {

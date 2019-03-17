@@ -1,0 +1,10 @@
+{
+  "/api": {
+    "target": "http://40.121.66.13:8080/api/ridesharing/login/",
+    "secure": false,
+    "pathRewrite": {
+      "^/api": ""
+    },
+    "changeOrigin": true
+  }
+}

@@ -18,6 +18,7 @@ import { GoogleChartsModule } from 'angular-google-charts';
 import { AgmCoreModule } from '@agm/core';
 import { GooglePlacesDirective } from './directives/google-places.directive';
 import { GooglePlaceModule } from "ngx-google-places-autocomplete";
+import { CreateTripComponent } from './components/create-trip/create-trip.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { GooglePlaceModule } from "ngx-google-places-autocomplete";
     LoginComponent,
     DriverComponent,
     PassengerComponent,
-    GooglePlacesDirective
+    GooglePlacesDirective,
+    CreateTripComponent
   ],
   imports: [
     GooglePlaceModule,
