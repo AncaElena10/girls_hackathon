@@ -10,24 +10,32 @@ class AppUser(models.Model):
     no_votes = models.IntegerField(default=0)
     phone = models.CharField(max_length=20)
 
+    def __str__(self):
+        return self.first_name + " " + self.last_name
+
 class Ride(models.Model):
-    PLANNED = "Planned"
-    ACTIVE = "Active"
+    CREATED = "Created"
+    IN_PROGRESS = "In_Progress"
     FINISHED = "Finished"
     CANCELED = "Canceled"
 
     STATE = (
-        (PLANNED, "Planned"),
-        (ACTIVE, "Active"),
+        (CREATED, "Created"),
+        (IN_PROGRESS, "In_Progress"),
         (FINISHED, "Finished"),
         (CANCELED, "Canceled"),
     )
+
+    def __str__(self):
+        return self.name
+
     start_pos_lat = models.FloatField()
     start_pos_long = models.FloatField()
     end_pos_lat = models.FloatField()
     end_pos_long = models.FloatField()
+    name = models.CharField(max_length=32, null=True)
     start_time = models.DateTimeField()
-    end_time = models.DateTimeField()
+    end_time = models.DateTimeField(null=True)
     driver_id = models.ForeignKey('AppUser', null=False, on_delete=models.CASCADE)
     cost = models.FloatField()
     free_slots = models.IntegerField()
