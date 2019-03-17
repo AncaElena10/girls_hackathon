@@ -34,4 +34,9 @@ section {
 
 agm-map {
   height: 300px;
+  width: 900px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 100px;
 }
