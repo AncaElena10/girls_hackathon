@@ -38,10 +38,11 @@ export class LoginComponent implements OnInit {
     this.submitted = true;
     console.log(this.loginForm.value)
 
-    // this.apiService.login(this.loginForm.value).subscribe((res) => {
-    //   console.log(res)
-    //   this.router.navigate(['/profile'])
-    // });
+    this.apiService.login(this.loginForm.value).subscribe((res) => {
+      console.log(res)
+      console.log("logat")
+      // this.router.navigate(['/profile'])
+    });
   }
 
 

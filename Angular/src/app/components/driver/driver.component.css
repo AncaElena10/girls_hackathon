@@ -18,3 +18,20 @@ header {
 section {
   padding: 150px 0;
 }
+
+#padd_ {
+  padding: 120px;
+}
+
+.tables_ {
+  padding: 120px;
+  text-align: center;
+}
+
+#margin_ {
+  margin-bottom: 10px;
+}
+
+agm-map {
+  height: 300px;
+}
