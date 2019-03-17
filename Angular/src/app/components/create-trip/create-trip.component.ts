@@ -38,6 +38,7 @@ export class CreateTripComponent implements OnInit {
 
   distance
 
+  tarifStandard = 1
 
   constructor(private router: Router, private mapsAPILoader: MapsAPILoader, private ngZone: NgZone, private utilityService: UtilityService) { }
 
@@ -49,6 +50,10 @@ export class CreateTripComponent implements OnInit {
         this.zoom = 16;
       });
     }
+
+    this.driver_id = localStorage.getItem('id')
+
+    // console.log(this.driver_id)
   }
 
   save() {
@@ -63,14 +68,15 @@ export class CreateTripComponent implements OnInit {
       'start_pos_long': this.start_pos_long,
       'end_pos_lat': this.end_pos_lat,
       'end_pos_long': this.end_pos_long,
+      'driver_id': this.driver_id,
     }
 
-    console.log(object)
+    // console.log(object)
 
     // this.router.navigate(['/driver'])
 
     this.utilityService.create_ride(object).subscribe((res) => {
-      console.log(res)
+      // console.log(res)  
     })
   }
 
@@ -175,10 +181,12 @@ export class CreateTripComponent implements OnInit {
     const to = new google.maps.LatLng(this.end_pos_lat, this.end_pos_long)
     this.distance = google.maps.geometry.spherical.computeDistanceBetween(from, to)
 
-    console.log(from)
-    console.log(to)
+    // console.log(from)
+    // console.log(to)
 
     console.log(this.distance)
+
+    this.cost = (this.distance / 1000) * 1.3
   }
 
 }
