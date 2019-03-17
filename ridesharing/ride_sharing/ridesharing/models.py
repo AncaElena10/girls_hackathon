@@ -41,9 +41,6 @@ class Ride(models.Model):
     passengers = models.CharField(max_length=200)
     status = models.CharField(max_length=50, choices=STATE, null=False, blank=False)
 
-    def __str__(self):
-        return str(self.id) + " " + self.name
-
     def passengers_get(self, path, default=None):
         try:
             return dpath.util.get(self.passengers, path)
