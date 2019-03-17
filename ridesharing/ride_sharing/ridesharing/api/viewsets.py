@@ -130,7 +130,7 @@ class RideViewSet(viewsets.GenericViewSet):
             user = AppUser.objects.get(pk=pk)
         except AppUser.DoesNotExist:
             return response.Response(status=404, data={'error': 'This user does not exist!'})
-            
+
         all_entries = Ride.objects.filter(passengers__ids__icontains=pk)
         serializer = self.get_serializer(all_entries, many=True)
         return response.Response(serializer.data)
