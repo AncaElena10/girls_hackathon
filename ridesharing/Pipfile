@@ -10,6 +10,7 @@ django = "*"
 psycopg2 = "*"
 djangorestframework = "*"
 django-cors-headers = "*"
+dpath = "*"
 
 [requires]
 python_version = "3.6"

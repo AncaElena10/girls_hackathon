@@ -93,3 +93,26 @@ class RideViewSet(viewsets.GenericViewSet):
         )
         
         return response.Response(status=200)
+
+    @detail_route(methods=['post'])
+    def add_user_to_ride(request, ride_id, **kwargs):
+        try:
+            ride = Ride.objects.get(pk=ride_id)
+        except Ride.DoesNotExist:
+            return response.Response(status=404, data={'error': 'This ride does not exist'})
+        
+        try:
+            passenger_id = request.data.get('passenger_id')
+        except AppUser.DoesNotExist:
+            return response.Response(status=404, data={'error': 'This user does not exist'})
+
+        if ride.free_slots:
+            passenger_id = passenger_id
+            ride.free_slots -= 1
+            passengers = ride.passengers_get('ids', [])
+            passengers.append(passenger_id)
+            ride.passengers_set('ids', passengers)
+            ride.save()
+            return response.Response(status=200, data={'message': "OK"})
+
+        return response.Response(status=404, data={'error': 'No more free seats :('})

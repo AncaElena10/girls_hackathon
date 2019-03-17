@@ -1,4 +1,5 @@
 from django.db import models
+import dpath.util
 
 # Create your models here.
 class AppUser(models.Model):
@@ -43,8 +44,11 @@ class Ride(models.Model):
     def __str__(self):
         return self.name
 
-    def set_passengers(self, x):
-        self.passengers = json.dumps(x)
+    def passengers_get(self, path, default=None):
+        try:
+            return dpath.util.get(self.passengers, path)
+        except KeyError:
+            return default
 
-    def get_passengers(self):
-        return json.loads(self.passengers)
+    def passengers_set(self, path, value):
+        dpath.util.new(self.passengers, path, value)
