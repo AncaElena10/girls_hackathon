@@ -9,9 +9,14 @@ import { HistoryComponent } from './components/history/history.component';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { LoginComponent } from './components/login/login.component';
-import { HttpClientModule } from '@angular/common/http'; import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
+import { HttpModule } from '@angular/http';
 import { DriverComponent } from './components/driver/driver.component';
 import { PassengerComponent } from './components/passenger/passenger.component';
+
+import { AgmCoreModule } from '@agm/core';
+import { GooglePlacesDirective } from './directives/google-places.directive';
+import { GooglePlaceModule } from "ngx-google-places-autocomplete";
 
 @NgModule({
   declarations: [
@@ -20,16 +25,20 @@ import { PassengerComponent } from './components/passenger/passenger.component';
     HistoryComponent,
     LoginComponent,
     DriverComponent,
-    PassengerComponent
+    PassengerComponent,
+    GooglePlacesDirective
   ],
   imports: [
+    GooglePlaceModule,
     BrowserModule,
-    // RouterModule.forRoot([])
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
     HttpModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyB4KfeROyevO6Jczu4d8G1Onc4Rim7HO4c'
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent]
