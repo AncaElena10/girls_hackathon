@@ -26,5 +26,4 @@ router.extend(ridesharing_router)
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^api/', include(router.urls)),
-    # url(r'^ridesharing/', include('ridesharing.urls')),
 ]
