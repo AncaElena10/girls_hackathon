@@ -57,7 +57,7 @@ class UserViewSet(viewsets.GenericViewSet):
 
 class RideViewSet(viewsets.GenericViewSet):
     serializer_class = RideSerializer
-    queryset = AppUser.objects.all()
+    queryset = Ride.objects.all()
 
     @list_route(methods=['post'])
     def create_ride(self, request, **kwargs):
@@ -131,9 +131,7 @@ class RideViewSet(viewsets.GenericViewSet):
             user = AppUser.objects.get(pk=pk)
         except AppUser.DoesNotExist:
             return response.Response(status=404, data={'error': 'This user does not exist!'})
-        
-        print(pk)
-        all_entries = Ride.objects.filter(passengers__ids__contains=pk)
-        print(all_entries)
+            
+        all_entries = Ride.objects.filter(passengers__ids__icontains=pk)
         serializer = self.get_serializer(all_entries, many=True)
         return response.Response(serializer.data)
