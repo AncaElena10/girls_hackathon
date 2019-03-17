@@ -37,7 +37,7 @@
     <h1>Welcome to StudentCab</h1>
     <h2>Standard price at any hour: 1.3 lei</h2>
     <p class="lead">Your favourite car sharing app</p>
-    <div>
+    <div *ngIf="currentLoggedInId!=null">
       <h1>You are:</h1>
       <div class="imagini" id="soferPasager">
         <div class="imagini">
