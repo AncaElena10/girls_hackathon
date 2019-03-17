@@ -64,6 +64,8 @@ class RideViewSet(viewsets.GenericViewSet):
         start_pos_long = request.data.get('start_pos_long')
         end_pos_lat = request.data.get('end_pos_lat')
         end_pos_long = request.data.get('end_pos_long')
+        trip_from = request.data.get('trip_from')
+        trip_to = request.data.get('trip_to')
         name = request.data.get('trip_name')
         start_time = request.data.get('trip_time')
         driver_id = request.data.get('driver_id')
@@ -82,6 +84,8 @@ class RideViewSet(viewsets.GenericViewSet):
             start_pos_lat=start_pos_lat,
             end_pos_long=end_pos_long,
             end_pos_lat=end_pos_lat,
+            trip_from=trip_from,
+            trip_to=trip_to,
             name=name,
             start_time=start_time,
             end_time=start_time,
@@ -107,13 +111,15 @@ class RideViewSet(viewsets.GenericViewSet):
             passenger_id = request.data.get('passenger_id')
         except AppUser.DoesNotExist:
             return response.Response(status=404, data={'error': 'This user does not exist'})
-
-        if ride.free_slots:
+        
+        print(ride.free_slots)
+        if ride.free_slots > 0:
             ride.free_slots -= 1
             passengers = ride.passengers_get('ids', [])
             print(passengers)
-            # passengers.append(passenger_id)
-            # ride.passengers_set('ids', passengers)
+            print("ALOOOOOO")
+            passengers.append(passenger_id)
+            ride.passengers_set('ids', passengers)
             ride.save()
             return response.Response(status=200, data={'message': "OK"})
 

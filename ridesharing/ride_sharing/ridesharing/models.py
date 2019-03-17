@@ -1,5 +1,6 @@
 from django.db import models
 import dpath.util
+from django.contrib.postgres.fields import JSONField
 
 # Create your models here.
 class AppUser(models.Model):
@@ -32,13 +33,15 @@ class Ride(models.Model):
     end_pos_lat = models.FloatField()
     end_pos_long = models.FloatField()
     name = models.CharField(max_length=32, null=True)
+    trip_from = models.CharField(max_length=100)
+    trip_to = models.CharField(max_length=100)
     start_time = models.DateTimeField()
     end_time = models.DateTimeField(null=True)
     driver_id = models.ForeignKey('AppUser', null=False, on_delete=models.CASCADE)
     cost = models.FloatField()
     free_slots = models.IntegerField()
     total_slots = models.IntegerField()
-    passengers = models.CharField(max_length=200)
+    passengers = JSONField(default=dict, blank=True,)
     status = models.CharField(max_length=50, choices=STATE, null=False, blank=False)
 
     def passengers_get(self, path, default=None):
