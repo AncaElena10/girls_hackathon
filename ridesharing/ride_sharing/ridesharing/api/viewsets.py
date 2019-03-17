@@ -12,7 +12,6 @@ class UserViewSet(viewsets.GenericViewSet):
         email = request.data['email']
         password = request.data['password']
 
-        print(email, password)
         try:
             user = AppUser.objects.get(email=email, password=password)
         except AppUser.DoesNotExist:
@@ -20,3 +19,18 @@ class UserViewSet(viewsets.GenericViewSet):
         
         serializer = self.serializer_class(user)
         return response.Response(serializer.data)
+
+    @list_route(methods=['post'])
+    def register(self, request, **kwargs):
+        email = request.data['email']
+        password = request.data['password']
+        first_name = request.data['first_name']
+        last_name = request.data['last_name']
+        phone = str(request.data['phone'])
+
+        try:
+            user = AppUser.objects.create(email=email, password=password, first_name=first_name, last_name=last_name, phone=phone)
+            return response.Response(status=200, data={'error': 'Success'})
+        except:
+            return response.Response(status=500, data={'error': 'Coult not create the user'})
+    
