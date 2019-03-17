@@ -134,3 +134,14 @@ class RideViewSet(viewsets.GenericViewSet):
         all_entries = Ride.objects.filter(passengers__ids__icontains=pk)
         serializer = self.get_serializer(all_entries, many=True)
         return response.Response(serializer.data)
+
+    @detail_route(methods=['get'])
+    def get_drivers_history(self, request, pk, **kwargs):
+        try:
+            user = AppUser.objects.get(pk=pk)
+        except AppUser.DoesNotExist:
+            return response.Response(status=404, data={'error': 'This user does not exist!'})
+
+        all_trips = Ride.objects.filter(driver_id__id=pk)
+        serializer = self.get_serializer(all_trips, many=True)
+        return response.Response(serializer.data)
