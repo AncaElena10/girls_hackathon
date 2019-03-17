@@ -56,12 +56,8 @@ class UserViewSet(viewsets.GenericViewSet):
 
     @detail_route(methods=['get'])
     def list_rides_history(self, request, pk, **kwargs):
-        try:
-            user = AppUser.objects.get(pk=pk)
-        except AppUser.DoesNotExist:
-            return response.Response(status=404, data={'error': 'This user does not exist!'})
-        
         all_entries = Ride.objects.all()
+        all_entries.save()
         return response.Response(status=200, data={"passed_rides": all_entries})
 
 
