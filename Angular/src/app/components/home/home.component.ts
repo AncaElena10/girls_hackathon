@@ -8,9 +8,20 @@ import { stripGeneratedFileSuffix } from '@angular/compiler/src/aot/util';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-
+  barchart;
   constructor(private router: Router) {
-
+    this.barchart = {
+      title: 'Material Bar Chart',
+      type: 'Bar',
+      columnNames: ['Rush Hours', 'StudentCab', 'Paxify', 'Muber'],
+      roles: [],
+      data: [
+        ['8:00', 1.3, 2, 2],
+        ['12:00', 1.3, 1.5, 2.5],
+        ['17:00', 1.3, 1.8, 3],
+        ['19:00', 1.3, 2.2, 3.5]
+      ],
+    };
   }
 
   currentLoggedInId: any = '';
@@ -45,3 +56,13 @@ export class HomeComponent implements OnInit {
     window.location.reload();
   }
 }
+
+
+
+
+
+
+
+
+
+

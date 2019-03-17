@@ -54,6 +54,19 @@ export class PassengerComponent implements OnInit {
         ['December', 1030]
       ]
     };
+    this.barchart = {
+      title: 'Material Bar Chart',
+      type: 'Bar',
+      columnNames: ['Rush Hours', 'StudentCab', 'Paxify', 'Muber'],
+      roles: [],
+      data: [
+        ['8:00', 1.3, 2, 2],
+        ['12:00', 1.3, 1.5, 2.5],
+        ['17:00', 1.3, 1.8, 3],
+        ['19:00', 1.3, 2.2, 3.5]
+      ],
+    };
 
   }
 }
+
