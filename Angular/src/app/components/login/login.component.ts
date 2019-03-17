@@ -18,6 +18,8 @@ export class LoginComponent implements OnInit {
   registerForm: FormGroup;
   submitted = false;
 
+  private loggedInStatus = JSON.parse(localStorage.getItem('loggedIn') || 'false');
+
   constructor(private apiService: ApiService, private router: Router, private formBuilder: FormBuilder, ) { }
 
   ngOnInit() {
@@ -37,24 +39,45 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.submitted = true;
-    console.log(this.loginForm.value)
+    // console.log(this.loginForm.value)
 
     this.apiService.login(this.loginForm.value).subscribe((res) => {
-      console.log(res)
-      console.log("logat")
-      // this.router.navigate(['/profile'])
-    });
+      // console.log(res)
+      // console.log("logat")
+      // this.router.navigate(['/home'])
+      this.extractUserInfo(res)
+      window.location.reload();
+    })
   }
 
+  extractUserInfo(res) {
+    // console.log(res)
+    localStorage.setItem('id', res.id);
+    localStorage.setItem('email', res.email);
+  }
 
   register() {
     this.submitted = true;
-    console.log(this.registerForm.value)
+    // console.log(this.registerForm.value)
 
-    // this.apiService.register(this.loginForm.value).subscribe((res) => {
-    //   console.log(res)
-    //   this.router.navigate(['/login'])
-    // });
+    this.apiService.register(this.loginForm.value).subscribe((res) => {
+      console.log(res)
+      // this.router.navigate(['/home'])
+      window.location.reload();
+    });
   }
 
+  setLoggedIn(value: boolean) {
+    this.loggedInStatus = value;
+    localStorage.setItem("loggedIn", this.loggedInStatus);
+    localStorage.clear();
+  }
+
+  getLoggedIn() {
+    return JSON.parse(localStorage.getItem('loggedIn') || this.loggedInStatus.toString());
+  }
+
+  getLoggedInStatus() {
+    return localStorage.getItem('loggedIn');
+  }
 }

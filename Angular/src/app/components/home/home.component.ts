@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { stripGeneratedFileSuffix } from '@angular/compiler/src/aot/util';
 
 @Component({
   selector: 'app-home',
@@ -12,19 +13,23 @@ export class HomeComponent implements OnInit {
 
   }
 
-  ngOnInit() {
+  currentLoggedInId: any = '';
 
+
+  ngOnInit() {
+    this.currentLoggedInId = localStorage.getItem("id");
+    // console.log(this.currentLoggedInId)
   }
 
   driver(event) {
-    console.log(event)
+    // console.log(event)
     if (event.target.id == "sofer_") {
       this.router.navigate(['/driver'])
     }
   }
 
   pasager(event) {
-    console.log(event)
+    // console.log(event)
     if (event.target.id == "pasager_") {
       this.router.navigate(['/passenger'])
     }
@@ -34,4 +39,9 @@ export class HomeComponent implements OnInit {
     document.getElementById(section).scrollIntoView({ block: 'center', inline: 'center' });
   }
 
+  logout() {
+    localStorage.clear();
+    // this.router.navigate(['/home'])
+    window.location.reload();
+  }
 }
