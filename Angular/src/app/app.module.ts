@@ -14,6 +14,7 @@ import { DriverComponent } from './components/driver/driver.component';
 import { PassengerComponent } from './components/passenger/passenger.component';
 
 import { GoogleChartsModule } from 'angular-google-charts';
+import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,9 @@ import { GoogleChartsModule } from 'angular-google-charts';
     HttpModule,
     ReactiveFormsModule,
     GoogleChartsModule.forRoot(),
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyB4KfeROyevO6Jczu4d8G1Onc4Rim7HO4c'
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -14,7 +14,7 @@
           <a class="nav-link js-scroll-trigger" routerLink="/about">History</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" routerLink="/contact">Contact</a>
+          <a class="nav-link js-scroll-trigger" (click)="scrollToSection('contact')" routerLink="/contact">Contact </a>
         </li>
         <li class="nav-item">
           <a class="nav-link js-scroll-trigger" routerLink="/login" data-toggle="modal" data-target="#modalLRForm">Sign
@@ -55,14 +55,18 @@
       <div class="col-lg-8 mx-auto">
         <h2>About the app</h2>
         <p class="lead">We are happy that you are riding with us. You can find your next city journey and make new
-          friends on your way. We make sure that you are safe with us :</p>
+          friends on your way. Our application is made so students like you can find cheaper ways to travel, in the
+          city or in the whole country. We make sure that you are safe with us :</p>
         <ul>
           <li>Every driver is verified so you don't have to worry.</li>
           <li>Avaible at any hour.</li>
           <li>You don't have to wait a long time. We find your car in real time.</li>
         </ul>
       </div>
+
     </div>
+    <img id="taxi2" src="assets/images/taxi2.png">
+
   </div>
 </section>
 
@@ -75,12 +79,23 @@
         <ul>
           <li>Mail: studentcab@gmail.com</li>
           <li>Phone: +40751317280.</li>
-          <li>Address: Street Atom, Number 5, Bucharest.</li>
+          <li>Address: 013708, Piața Presei Libere 3, Bucharest.</li>
         </ul>
+        <h1>{{ title }}</h1>
+
+        <!-- this creates a google map on the page with the given lat/lng from -->
+        <!-- the component as the initial center of the map: -->
+        <!-- lat: number = 44.477431;
+             lng: number = 26.071625;-->
+        <agm-map [zoom]="16" [latitude]="44.477431" [longitude]="26.071625">
+          <agm-marker [latitude]="44.477431" [longitude]="26.071625"></agm-marker>
+        </agm-map>
       </div>
     </div>
   </div>
 </section>
+
+
 
 <!-- Footer -->
 <footer class="py-5 bg-dark">

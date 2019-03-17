@@ -59,3 +59,17 @@ section[_ngcontent-c1] {
   height: auto;
   width: auto;
 }
+
+#taxi2 {
+  margin: 0 auto;
+  max-width: 26%;
+  max-height: 196px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+agm-map {
+  height: 300px;
+}
