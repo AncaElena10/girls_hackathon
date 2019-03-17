@@ -1,8 +1,9 @@
 /// <reference types="@types/googlemaps" />
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { MapsAPILoader } from '@agm/core';
+import { UtilityService } from 'src/app/services/utility.service';
 
 @Component({
   selector: 'app-create-trip',
@@ -19,13 +20,26 @@ export class CreateTripComponent implements OnInit {
   trip_from = ""
   trip_to = ""
   trip_time = ""
-  trip_cost = ""
-  trip_seats = ""
+  cost: Number
+  trip_seats: Number
 
   passenger_name = ""
   accept_trip = ""
 
-  constructor(private router: Router) { }
+  start_pos_lat
+  start_pos_long
+  end_pos_lat
+  end_pos_long
+
+  driver_id
+
+  tripStart: boolean = true
+  tripEnd: boolean = false
+
+  distance
+
+
+  constructor(private router: Router, private mapsAPILoader: MapsAPILoader, private ngZone: NgZone, private utilityService: UtilityService) { }
 
   ngOnInit() {
     if ("geolocation" in navigator) {
@@ -42,40 +56,129 @@ export class CreateTripComponent implements OnInit {
       'trip_name': this.trip_name,
       'trip_from': this.trip_from,
       'trip_to': this.trip_to,
-      'trip_time': this.trip_time,
-      'trip_cost': this.trip_cost,
+      'trip_time': new Date(this.trip_time),
+      'cost': this.cost,
       'trip_seats': this.trip_seats,
+      'start_pos_lat': this.start_pos_lat,
+      'start_pos_long': this.start_pos_long,
+      'end_pos_lat': this.end_pos_lat,
+      'end_pos_long': this.end_pos_long,
     }
 
     console.log(object)
 
     // this.router.navigate(['/driver'])
 
-    this.getLocation()
+    this.utilityService.create_ride(object).subscribe((res) => {
+      console.log(res)
+    })
   }
 
-  getLocation(): Observable<any> {
-    var address = this.trip_from
+  start_pos_lat1
+  start_pos_long1
+  end_pos_lat1
+  end_pos_long1
 
-    console.log('Getting address: ', address);
-    let geocoder = new google.maps.Geocoder();
-    console.log(geocoder)
-    return Observable.create(observer => {
-      console.log("ajskbd")
-      geocoder.geocode({
-        'address': address
-      }, (results, status) => {
-        if (status == google.maps.GeocoderStatus.OK) {
-          observer.next(results[0].geometry.location);
-          observer.complete();
-        } else {
-          console.log('Error: ', results, ' & Status: ', status);
-          observer.error();
-        }
-      });
-      console.log("aici")
-      console.log(geocoder)
-    });
+  markerDragEnd(m: any, event: MouseEvent) {
+    if (this.tripStart) {
+      this.start_pos_lat1 = event.coords.lat
+      this.start_pos_long1 = event.coords.lng
+      // this.tripStart = false
+    }
+
+    if (this.tripEnd) {
+      this.end_pos_lat1 = event.coords.lat
+      this.end_pos_long1 = event.coords.lng
+      // this.tripEnd = false
+    }
+  }
+
+  setStartPoint() {
+    this.tripStart = false
+    this.tripEnd = true
+
+    this.start_pos_lat = this.start_pos_lat1
+    this.start_pos_long = this.start_pos_long1
+
+    // console.log(this.start_pos_lat)
+    // console.log(this.start_pos_long)
+
+    // if (navigator.geolocation) {
+    //   navigator.geolocation.getCurrentPosition(
+    //     position => {
+    //       let geocoder = new google.maps.Geocoder();
+    //       let latlng = new google.maps.LatLng(this.start_pos_lat, this.start_pos_long);
+    //       let request = {
+    //         latLng: latlng
+    //       };
+
+    //       geocoder.geocode(request, (results, status) => {
+    //         if (status == google.maps.GeocoderStatus.OK) {
+    //           if (results[0] != null) {
+    //             this.ngZone.run(() => {
+    //               this.trip_from = results[0].formatted_address
+    //               console.log(this.trip_from)
+    //             })
+    //           } else {
+    //             alert("No address available");
+    //           }
+    //         }
+    //       });
+    //     },
+    //     error => {
+    //       console.log("Error code: " + error.code + "<br /> Error message: " + error.message);
+    //     }
+    //   );
+    // }
+  }
+
+  setEndPoint() {
+    this.tripEnd = false
+    this.tripStart = true
+
+    this.end_pos_lat = this.end_pos_lat1
+    this.end_pos_long = this.end_pos_long1
+
+    this.calculate_distance()
+
+    // if (navigator.geolocation) {
+    //   navigator.geolocation.getCurrentPosition(
+    //     position => {
+    //       let geocoder = new google.maps.Geocoder();
+    //       let latlng = new google.maps.LatLng(this.end_pos_lat, this.end_pos_long);
+    //       let request = {
+    //         latLng: latlng
+    //       };
+
+    //       geocoder.geocode(request, (results, status) => {
+    //         if (status == google.maps.GeocoderStatus.OK) {
+    //           if (results[0] != null) {
+    //             this.ngZone.run(() => {
+    //               this.trip_to = results[0].formatted_address
+    //               console.log(this.trip_to)
+    //             })
+    //           } else {
+    //             alert("No address available");
+    //           }
+    //         }
+    //       });
+    //     },
+    //     error => {
+    //       console.log("Error code: " + error.code + "<br /> Error message: " + error.message);
+    //     }
+    //   );
+    // }
+  }
+
+  calculate_distance() {
+    const from = new google.maps.LatLng(this.start_pos_lat, this.start_pos_long)
+    const to = new google.maps.LatLng(this.end_pos_lat, this.end_pos_long)
+    this.distance = google.maps.geometry.spherical.computeDistanceBetween(from, to)
+
+    console.log(from)
+    console.log(to)
+
+    console.log(this.distance)
   }
 
 }

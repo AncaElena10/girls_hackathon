@@ -5,3 +5,7 @@ agm-map {
 #margin_ {
   margin-bottom: 10px;
 }
+
+.stuff_ {
+  display: -webkit-inline-box;
+}
