@@ -1,5 +1,6 @@
 /// <reference types="@types/googlemaps" />
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from 'src/app/services/api.service';
 
 const place = null as google.maps.places.PlaceResult;
 
@@ -10,9 +11,34 @@ const place = null as google.maps.places.PlaceResult;
 })
 export class DriverComponent implements OnInit {
 
-  constructor() {
+  trips_list = [{
+    "trip_name": "TEEEEEEST",
+    'trip_from': "otopeni",
+    'trip_to': "unirii",
+    "trip_time": "2019-03-17T03:34:34+00:00",
+    "cost": 12,
+    "trip_seats": 2,
+    "driver_id": 1,
+  },
+  {
+    "trip_name": "TEEEEEEST1",
+    'trip_from': "otopeni1",
+    'trip_to': "unirii1",
+    "trip_time": "2020-03-17T03:34:34+00:00",
+    "cost": 12,
+    "trip_seats": 2,
+    "driver_id": 1,
+  }]
+
+  constructor(private apiService: ApiService) {
+
   }
 
+  currentLoggedInId: any = '';
+
   ngOnInit() {
+    this.currentLoggedInId = localStorage.getItem("id");
   }
+
+
 }

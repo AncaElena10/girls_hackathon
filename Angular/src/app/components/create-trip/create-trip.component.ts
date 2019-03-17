@@ -1,6 +1,6 @@
 /// <reference types="@types/googlemaps" />
 
-import { Component, OnInit, NgZone } from '@angular/core';
+import { Component, OnInit, NgZone, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { MapsAPILoader } from '@agm/core';
 import { UtilityService } from 'src/app/services/utility.service';
@@ -42,7 +42,11 @@ export class CreateTripComponent implements OnInit {
 
   constructor(private router: Router, private mapsAPILoader: MapsAPILoader, private ngZone: NgZone, private utilityService: UtilityService) { }
 
+
+  currentLoggedInId: any = '';
+
   ngOnInit() {
+    this.currentLoggedInId = localStorage.getItem("id");
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition((position) => {
         this.lat = position.coords.latitude;
@@ -56,8 +60,10 @@ export class CreateTripComponent implements OnInit {
     // console.log(this.driver_id)
   }
 
+  object
+
   save() {
-    let object = {
+    this.object = {
       'trip_name': this.trip_name,
       'trip_from': this.trip_from,
       'trip_to': this.trip_to,
@@ -71,13 +77,16 @@ export class CreateTripComponent implements OnInit {
       'driver_id': this.driver_id,
     }
 
+    this.utilityService.create_ride(this.object)
+
     // console.log(object)
 
     // this.router.navigate(['/driver'])
 
-    this.utilityService.create_ride(object).subscribe((res) => {
-      // console.log(res)  
-    })
+    // this.utilityService.create_ride(this.object).subscribe((res) => {
+    //   // console.log(res)
+    //   this.router.navigate(['/driver'])
+    // })
   }
 
   start_pos_lat1
