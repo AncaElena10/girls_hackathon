@@ -1,6 +1,6 @@
 from rest_framework import viewsets, response
-from .serializers import UserSerializer
-from ridesharing.models import AppUser
+from .serializers import UserSerializer, RideSerializer
+from ridesharing.models import AppUser, Ride
 from rest_framework.decorators import list_route
 
 class UserViewSet(viewsets.GenericViewSet):
@@ -39,7 +39,7 @@ class RideViewSet(viewsets.GenericViewSet):
     queryset = AppUser.objects.all()
 
     @list_route(methods=['post'])
-    def create(self, request, **kwargs):
+    def createRide(self, request, **kwargs):
         start_pos_lat = request.data['start_pos_lat']
         start_pos_long = request.data['start_pos_long']
         end_pos_lat = request.data['end_pos_lat']
@@ -55,9 +55,8 @@ class RideViewSet(viewsets.GenericViewSet):
         print(driver_id, start_time)
         
         try:
-            ride = Ride.objects.create(start_pos_lat = start_pos_lat,
-                start_pos_long = start_pos_long,
-                end_pos_lat = end_pos_lat,
+            ride = Ride.objects.create(start_pos_long = start_pos_long,
+                start_pos_lat = start_pos_lat,
                 end_pos_long = end_pos_long,
                 end_pos_lat = end_pos_lat,
                 start_time = start_time,
@@ -74,4 +73,3 @@ class RideViewSet(viewsets.GenericViewSet):
         
         serializer = self.serializer_class(ride)
         return response.Response(serializer.data)
-        
