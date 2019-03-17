@@ -35,6 +35,35 @@
   </div>
 </header>
 
+<div class="tables_">
+  <h3>Your next trips</h3>
+  <button class="btn btn-primary" style="margin-bottom: 10px;">Add new trip</button>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">From</th>
+        <th scope="col">To</th>
+        <th scope="col">Time</th>
+        <th scope="col">Cost</th>
+        <th scope="col">Seats</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let trip of trips_list">
+        <ng-container *ngIf="trip.driver_id == currentLoggedInId">
+          <td>{{trip.trip_name }}</td>
+          <td>{{trip.trip_from }}</td>
+          <td>{{trip.trip_to }}</td>
+          <td>{{trip.trip_time | date: "shortDate" }}</td>
+          <td>{{trip.cost }}</td>
+          <td>{{trip.trip_seats }}</td>
+        </ng-container>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
 <!-- <google-chart [title]="chart.title" [type]="chart.type" [data]="chart.data" [columnNames]="chart.columnNames" [options]="chart.options"> -->
 
 <google-chart [title]="piechart.title" [type]="piechart.type" [data]="piechart.data" [columnNames]="piechart.columnNames"
@@ -42,7 +71,4 @@
 </google-chart>
 <google-chart [title]="linechart.title" [type]="linechart.type" [data]="linechart.data" [columnNames]="linechart.columnNames"
   [options]="linechart.options">
-</google-chart>
-<google-chart [title]="barchart.title" [type]="barchart.type" [data]="barchart.data" [columnNames]="barchart.columnNames"
-  [options]="barchart.options">
 </google-chart>

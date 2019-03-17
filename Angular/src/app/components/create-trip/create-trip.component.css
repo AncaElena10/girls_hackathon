@@ -9,3 +9,25 @@ agm-map {
 .stuff_ {
   display: -webkit-inline-box;
 }
+
+
+header {
+  padding: 156px 0 100px;
+}
+
+section {
+  padding: 150px 0;
+}
+
+#imagineTaxi {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 15%;
+  max-height: 15%;
+  height: auto;
+  width: auto;
+  margin: 0 auto;
+  margin-top: -100px;
+}

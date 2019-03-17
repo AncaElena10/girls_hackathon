@@ -35,8 +35,9 @@
   </div>
   <div class="container text-center">
     <h1>Welcome to StudentCab</h1>
+    <h2>Standard price at any hour: 1.3 lei</h2>
     <p class="lead">Your favourite car sharing app</p>
-    <div>
+    <div *ngIf="currentLoggedInId!=null">
       <h1>You are:</h1>
       <div class="imagini" id="soferPasager">
         <div class="imagini">
@@ -58,14 +59,21 @@
     <div class="row">
       <div class="col-lg-8 mx-auto">
         <h2>About the app</h2>
+        <div id="chart">
+          <p class="lead" style="margin-left: 13%">Our prices</p>
+          <google-chart [title]="barchart.title" [type]="barchart.type" [data]="barchart.data" [columnNames]="barchart.columnNames"
+            [options]="barchart.options">
+          </google-chart>
+        </div>
         <p class="lead">We are happy that you are riding with us. You can find your next city journey and make new
           friends on your way. Our application is made so students like you can find cheaper ways to travel, in the
           city or in the whole country. We make sure that you are safe with us :</p>
         <ul>
           <li>Every driver is verified so you don't have to worry.</li>
-          <li>Avaible at any hour.</li>
+          <li>Available at any hour.</li>
           <li>You don't have to wait a long time. We find your car in real time.</li>
         </ul>
+
       </div>
 
     </div>

@@ -58,7 +58,7 @@ export class LoginComponent implements OnInit {
 
   register() {
     this.submitted = true;
-    // console.log(this.registerForm.value)
+    console.log(this.registerForm.value)
 
     this.apiService.register(this.loginForm.value).subscribe((res) => {
       console.log(res)

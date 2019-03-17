@@ -16,9 +16,13 @@
         <li class="nav-item">
           <a class="nav-link js-scroll-trigger" routerLink="/contact">Contact</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" routerLink="/login" data-toggle="modal" data-target="#addNewTrip">Sign
+        <li *ngIf="currentLoggedInId == null" class="nav-item">
+          <a class="nav-link js-scroll-trigger" routerLink="/login" data-toggle="modal" data-target="#modalLRForm">Sign
             in</a>
+        </li>
+        <li *ngIf="currentLoggedInId != null" class="nav-item">
+          <a class="nav-link js-scroll-trigger" routerLink="/logout" data-toggle="modal" data-target="#logout_modal">Log
+            out</a>
         </li>
       </ul>
     </div>
@@ -37,11 +41,10 @@
 
 <div class="tables_">
   <h3>Your next trips</h3>
-  <button class="btn btn-primary" routerLink="/new_trip">Add new trip</button>
+  <button class="btn btn-primary" routerLink="/new_trip" style="margin-bottom: 10px;">Add new trip</button>
   <table class="table">
     <thead>
       <tr>
-        <th scope="col">Nr.</th>
         <th scope="col">Name</th>
         <th scope="col">From</th>
         <th scope="col">To</th>
@@ -51,14 +54,15 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>1</td>
-        <td>etc</td>
-        <td>ashdf</td>
-        <td>sasd</td>
-        <td>436</td>
-        <td>25</td>
-        <td>dj</td>
+      <tr *ngFor="let trip of trips_list">
+        <ng-container *ngIf="trip.driver_id == currentLoggedInId">
+          <td>{{trip.trip_name }}</td>
+          <td>{{trip.trip_from }}</td>
+          <td>{{trip.trip_to }}</td>
+          <td>{{trip.trip_time | date: "shortDate" }}</td>
+          <td>{{trip.cost }}</td>
+          <td>{{trip.trip_seats }}</td>
+        </ng-container>
       </tr>
     </tbody>
   </table>
@@ -84,5 +88,3 @@
     </tbody>
   </table>
 </div>
-
-<app-create-trip></app-create-trip>
