@@ -42,7 +42,7 @@
               </div>
 
               <div class="text-center mt-2">
-                <button class="btn btn-info" (click)="login()">Log in</button>
+                <button class="btn btn-info" (click)="login()" data-dismiss="modal">Log in</button>
               </div>
             </form>
             <!--Footer-->
@@ -58,35 +58,26 @@
               <div class=" form-group">
                 <label for="firstName">First Name</label>
                 <input type="text" formControlName="firstName" class="form-control" autocomplete="nope" />
-                <!-- <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
-                  <div *ngIf="f.firstName.errors.required">First Name is required</div>
-                </div> -->
               </div>
               <div class="form-group">
                 <label for="lastName">Last Name</label>
                 <input type="text" formControlName="lastName" class="form-control" autocomplete="nope" />
-                <!-- <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
-                  <div *ngIf="f.lastName.errors.required">Last Name is required</div>
-                </div> -->
               </div>
               <div class="form-group">
                 <label for="email">E-mail</label>
                 <input type="text" formControlName="email" class="form-control" autocomplete="nope" />
-                <!-- <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
-                  <div *ngIf="f.email.errors.required">E-mail is required</div>
-                </div> -->
               </div>
               <div class="form-group">
                 <label for="password">Password</label>
                 <input type="password" formControlName="password" class="form-control" autocomplete="nope" />
-                <!-- <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-                  <div *ngIf="f.password.errors.required">Password is required</div>
-                  <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
-                </div> -->
+              </div>
+              <div class="form-group">
+                <label for="phone">Phone</label>
+                <input type="phone" formControlName="phone" class="form-control" autocomplete="nope" />
               </div>
 
               <div class="text-center form-sm mt-2">
-                <button class="btn btn-info" (click)="register()">Sign up</button>
+                <button class="btn btn-info" (click)="register()" data-dismiss="modal">Sign up</button>
               </div>
             </form>
             <!--Footer-->

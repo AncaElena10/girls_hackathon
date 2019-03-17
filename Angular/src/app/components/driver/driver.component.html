@@ -37,7 +37,7 @@
 
 <div class="tables_">
   <h3>Your next trips</h3>
-  <button class="btn btn-primary" data-toggle="modal" data-target="#addNewTrip">Add new trip</button>
+  <button class="btn btn-primary" routerLink="/new_trip">Add new trip</button>
   <table class="table">
     <thead>
       <tr>
@@ -85,48 +85,4 @@
   </table>
 </div>
 
-<div class="modal fade" tabindex="-1" role="dialog" id="addNewTrip">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Add a new trip</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body" id="margin_">
-        <div class="input-group" id="margin_">
-          <input type="text" class="form-control" placeholder="Trip name" [(ngModel)]="trip_name">
-        </div>
-        <div class="form-group">
-          <input ngx-google-places-autocomplete [options]="{types: [], componentRestrictions: { country: 'UA' } }"
-            #placesRef="ngx-places" (onAddressChange)="handleAddressChange($event)" />
-        </div>
-        <div class="form-group">
-
-        </div>
-        <div class="input-group" id="margin_">
-          <input google-place type="text" class="form-control" placeholder="To" [(ngModel)]="trip_to">
-        </div>
-        <div class="input-group" id="margin_">
-          <input type="text" class="form-control" placeholder="Time" [(ngModel)]="trip_time">
-        </div>
-        <div class="input-group" id="margin_">
-          <input type="text" class="form-control" placeholder="Cost" [(ngModel)]="trip_cost">
-        </div>
-        <div class="input-group" id="margin_">
-          <input type="text" class="form-control" placeholder="Available seats" [(ngModel)]="trip_seats">
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary" (click)="save()">Save changes</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-<agm-map [latitude]="lat" [longitude]="lng" [scrollwheel]="true" [zoom]="zoom" [fullscreenControl]="true">
-  <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
-</agm-map>
+<app-create-trip></app-create-trip>

@@ -28,15 +28,17 @@ section {
   text-align: center;
 }
 
-#margin_ {
-  margin-bottom: 10px;
-}
 
-agm-map {
+
+/* agm-map {
   height: 300px;
+<<<<<<< HEAD
   width: 900px;
   display: block;
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 100px;
 }
+=======
+} */
+>>>>>>> 72475d5106b3a9d296ed69d6ca22a29f651d23e7

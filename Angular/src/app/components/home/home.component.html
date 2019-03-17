@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
   <div class="container">
-    <a class="navbar-brand js-scroll-trigger" href="#page-top">StudentCab</a>
+    <a class="navbar-brand js-scroll-trigger">StudentCab</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive"
       aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -16,9 +16,13 @@
         <li class="nav-item">
           <a class="nav-link js-scroll-trigger" (click)="scrollToSection('contact')" routerLink="/contact">Contact </a>
         </li>
-        <li class="nav-item">
+        <li *ngIf="currentLoggedInId == null" class="nav-item">
           <a class="nav-link js-scroll-trigger" routerLink="/login" data-toggle="modal" data-target="#modalLRForm">Sign
             in</a>
+        </li>
+        <li *ngIf="currentLoggedInId != null" class="nav-item">
+          <a class="nav-link js-scroll-trigger" routerLink="/logout" data-toggle="modal" data-target="#logout_modal">Log
+            out</a>
         </li>
       </ul>
     </div>
@@ -106,3 +110,23 @@
 </footer>
 
 <app-login></app-login>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="logout_modal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Log out</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to log out of the system?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-warning btn-outline" (click)="logout()" data-dismiss="modal">Yes</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+      </div>
+    </div>
+  </div>
+</div>
